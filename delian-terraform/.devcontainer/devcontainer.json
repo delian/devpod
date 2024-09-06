@@ -1,0 +1,68 @@
+{
+  "name": "Terraform",
+  "image": "mcr.microsoft.com/vscode/devcontainers/base:ubuntu-22.04",
+  "features": {
+    "ghcr.io/devcontainers/features/terraform:1": {
+      "version": "latest",
+      "tflint": "latest",
+      "terragrunt": "latest",
+      "installTerraformDocs": true,
+      "installTFsec": true
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "version": "latest",
+      "dockerDashComposeVersion": "v2"
+    },
+    "ghcr.io/devcontainers/features/azure-cli:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers-contrib/features/packer-asdf:2": {},
+    "ghcr.io/prulloac/devcontainer-features/pre-commit:1": {},
+    "ghcr.io/rio/features/chezmoi:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "hashicorp.terraform",
+        "aaron-bond.better-comments",
+        "alefragnani.Bookmarks",
+        "mikestead.dotenv",
+        "usernamehw.errorlens",
+        "IBM.output-colorizer",
+        "4ops.packer",
+        "johnpapa.vscode-peacock",
+        "wayou.vscode-todo-highlight",
+        "ms-azuretools.vscode-azureterraform",
+        "Anjali.clipboard-history",
+        "tamasfe.even-better-toml",
+        "waderyan.gitblame",
+        "mhutchie.git-graph",
+        "donjayamanne.githistory",
+        "felipecaputo.git-project-manager",
+        "bierner.github-markdown-preview",
+        "eamodio.gitlens",
+        "ms-vscode.makefile-tools",
+        "usama8800.tab-groups",
+        "Gruntfuggly.todo-tree",
+        "be5invis.toml",
+        "redhat.vscode-yaml"
+      ],
+      "settings": {
+        "terraform.languageServer": {
+          "enabled": true,
+          "args": [
+            "serve"
+          ]
+        }
+      }
+    }
+  },
+  "postCreateCommand": "git clone --depth=1 https://github.com/tfutils/tfenv.git ~/.tfenv && echo 'export PATH=\"$HOME/.tfenv/bin:$PATH\"' >> ~/.bash_profile;sudo apt update && sudo apt upgrade -y && sudo apt install -y ruby git zsh tmux vim python3 python-is-python3 python3-poetry pre-commit llvm clang make tmux fish && chezmoi init --apply --depth=1 delian/chezmoi",
+  "remoteEnv": {
+    "TF_LOG": "",
+    "TF_LOG_PATH": "'./terraform.log"
+  }
+}
